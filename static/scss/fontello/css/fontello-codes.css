@@ -2,4 +2,9 @@
 .icon-ok:before { content: '\e800'; } /* '' */
 .icon-cancel:before { content: '\e801'; } /* '' */
 .icon-phone:before { content: '\e802'; } /* '' */
+.icon-clock:before { content: '\e803'; } /* '' */
+.icon-plus:before { content: '\e804'; } /* '' */
+.icon-menu:before { content: '\e805'; } /* '' */
+.icon-down-open:before { content: '\e807'; } /* '' */
+.icon-bell:before { content: '\f0f3'; } /* '' */
 .icon-trash:before { content: '\f1f8'; } /* '' */

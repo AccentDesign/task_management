@@ -1,0 +1,28 @@
+<div class="filter-box">
+    <a class="pointer" (click)="open=!open">Filter <i class="icon-down-open"></i></a>
+    <div class="filter-options" *ngIf="open">
+        <label>User</label>
+        <select [(ngModel)]="filters.user" (ngModelChange)="onUserChange($event)">
+            <option *ngFor="let option of users$ | async" [ngValue]="option.id">{{ option.full_name }}</option>
+        </select>
+        <label>Client</label>
+        <select [(ngModel)]="filters.client" (ngModelChange)="onClientChange($event)">
+            <option [ngValue]="null">---------</option>
+            <option *ngFor="let option of clients$ | async" [ngValue]="option.id">{{ option.name }}</option>
+        </select>
+        <label>Job</label>
+        <select [(ngModel)]="filters.job" (ngModelChange)="onJobChange($event)">
+            <option [ngValue]="null">---------</option>
+            <ng-container *ngFor="let option of jobs$ | async">
+                <option *ngIf="option.client === filters.client" [ngValue]="option.id">{{ option.title }}</option>
+            </ng-container>
+        </select>
+        <label>Overdue</label>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" [(ngModel)]="filters.overdue" (ngModelChange)="onOverdueChange($event)">
+                <span></span>
+            </label>
+        </div>
+    </div>
+</div>

@@ -4,11 +4,30 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 from django.views.generic import TemplateView
+from rest_framework.documentation import include_docs_urls
+from rest_framework.schemas import get_schema_view
 
+from app import routers
 from app.views import Home
+from authentication.urls import router as auth_router
+from wip.urls import router as wip_router
+
+
+# api
+API_TITLE = 'WIP API'
+
+# api schemas
+schema_view = get_schema_view(title=API_TITLE)
+
+# api router
+router = routers.DefaultRouter()
+router.extend(auth_router)
+router.extend(wip_router)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/', include((router.urls, 'api'))),
+    path('api/docs/', include_docs_urls(title=API_TITLE)),
     path('auth/', include('authentication.urls')),
     path('wip/', include('wip.urls')),
     path('', Home.as_view(), name='home')

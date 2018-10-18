@@ -19,6 +19,42 @@ input[type="time"] {
   -webkit-appearance: none; // stylelint-disable-line property-no-vendor-prefix
 }
 
+input[disabled]:not(:hover) {
+  background: color-darken("secondary", 3%);
+  border-color: transparent;
+}
+
+select[disabled]:not(:hover) {
+  appearance: textfield;
+  background: color-darken("secondary", 3%);
+  border-color: transparent;
+}
+
+textarea[disabled]:not(:hover) {
+  resize: none;
+  &.transparent {
+    background: color-darken("secondary", 3%);
+    border-color: transparent;
+  }
+}
+
+input[disabled]:hover,
+select[disabled]:hover,
+textarea[disabled]:hover {
+  cursor: pointer;
+}
+
+textarea {
+  display: block;
+}
+
+.input-small {
+  height: 3rem !important;
+  padding: .5rem 1rem;
+  margin-bottom: .5rem;
+  font-size: 80%;
+}
+
 output {
   min-width: 4rem;
 }

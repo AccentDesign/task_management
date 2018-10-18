@@ -1,5 +1,7 @@
 // Header
 // -----------------------------------------
+/* stylelint-disable selector-no-qualifying-type  */
+
 
 header {
   background: color("arsenic");
@@ -26,39 +28,8 @@ header {
     padding: 1rem 2rem;
     color: color("white");
   }
-}
 
-
-header .avatar {
-  display: inline-block;
-  width: 3rem;
-  height: 3rem;
-  line-height: 3rem;
-  text-align: center;
-  background: color("dodgerblue");
-  border-radius: 50%;
-
-  .avatar-text {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: color("white");
-  }
-  .avatar-close {
-    display: none;
-    color: color("primary");
-  }
-
-  &:hover {
-
-    background: color("white");
-
-    .avatar-text {
-      display: none;
-    }
-
-    .avatar-close {
-      display: block;
-    }
-
+  li a.active {
+    border-top: 2px solid color("wildwillow");
   }
 }

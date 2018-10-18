@@ -1,10 +1,12 @@
-{% load i18n static %}
+{% load i18n static wip_tags %}
 <header>
     <div class="container-fluid d-flex align-items-center">
         <a class="nav-home mt-1 " href="/"><img src="{% static 'dist/img/task-management-logo.svg' %}" width="35" height="35"></a>
+        {% section_name as section %}
         <ul class="nav">
-            <li><a href="{% url 'wip:client-list-view' %}">{% trans 'Clients' %}</a></li>
-            <li><a href="{% url 'wip:timesheet' %}">{% trans 'Timesheet' %}</a></li>
+            <li><a href="{% url 'wip:taskboard' %}" {% if section == 'taskboard' %} class="active"{% endif %}>{% trans 'Taskboard' %}</a></li>
+            <li><a href="{% url 'wip:client-list' %}" {% if section == 'client' %} class="active"{% endif %}>{% trans 'Clients' %}</a></li>
+            <li><a href="{% url 'wip:timesheet' %}" {% if section == 'timesheet' %} class="active"{% endif %}>{% trans 'Timesheet' %}</a></li>
         </ul>
         <div class="ml-auto">
             <a class="avatar" href="{% url 'logout' %}">

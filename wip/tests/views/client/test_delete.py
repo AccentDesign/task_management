@@ -28,7 +28,7 @@ class TestView(AppTestCase):
         response = self.client.post(self.url, {})
 
         # test redirected after
-        self.assertRedirects(response, reverse('wip:client-list-view'), 302, 200)
+        self.assertRedirects(response, reverse('wip:client-list'), 302, 200)
 
         # test updated
         with self.assertRaises(ObjectDoesNotExist):

@@ -3,6 +3,12 @@
 
         evt.preventDefault();
 
+        ajaxHeaders = {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'X-CSRFToken': '{{ csrf_token }}'
+        };
+
         toastr.options = {
           "closeButton": true,
           "progressBar": true,
@@ -12,9 +18,14 @@
 
         $.ajax({
             url: $(this).data("make-call-url"),
-            data: {
-                csrfmiddlewaretoken: '{{ csrf_token }}'
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token }}'
             },
+            data: JSON.stringify({
+                telephone_number: $(this).data("tel")
+            }),
             method: "POST",
             success: function (data) {
                 toastr["success"](data.message, "Success");

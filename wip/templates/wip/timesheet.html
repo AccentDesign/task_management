@@ -79,11 +79,11 @@
     <script type="text/javascript" src="{% static 'dist/vendor/moment/moment.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'dist/vendor/fullcalendar/fullcalendar.min.js' %}"></script>
     <script type="text/javascript">
-        var timeDailySignoffUrl = "{% url 'wip:timedailysignoff-list' %}";
-        var timeEntryListUrl = "{% url 'wip:timeentry-list' %}";
-        var clientListUrl = "{% url 'wip:client-list' %}";
-        var jobListUrl = "{% url 'wip:job-list' %}";
-        var taskListUrl = "{% url 'wip:task-list' %}";
+        var timeDailySignoffUrl = "{% url 'api:timedailysignoff-list' %}";
+        var timeEntryListUrl = "{% url 'api:timeentry-list' %}";
+        var clientListUrl = "{% url 'api:client-list' %}";
+        var jobListUrl = "{% url 'api:job-list' %}";
+        var taskListUrl = "{% url 'api:task-list' %}";
         var loggedInUser = {{ user.pk }};
         var currentUser = {{ user.pk }};
         var canManageOthers = {% if perms.wip.manage_time_entry %}true{% else %}false{% endif %}

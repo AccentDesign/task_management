@@ -1,0 +1,51 @@
+// avatar
+// ------------------------------------------
+/* stylelint-disable selector-no-qualifying-type  */
+
+.avatar {
+  display: inline-block;
+  width: 3rem;
+  height: 3rem;
+  line-height: 3rem;
+  text-align: center;
+  background: color("shadylady");
+  border-radius: 50%;
+
+  .avatar-text {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: color("white");
+  }
+  .avatar-close {
+    display: none;
+    color: color("primary");
+  }
+}
+
+.avatar.new {
+  background: transparent;
+  border: dotted 1px color("shadylady");
+
+  .avatar-text {
+    color: color("shadylady");
+  }
+}
+
+a.avatar:hover {
+
+  background: color("white");
+
+  .avatar-text {
+    display: none;
+  }
+
+  .avatar-close {
+    display: block;
+  }
+}
+
+.avatar-small {
+  width: 2.2rem;
+  height: 2.2rem;
+  line-height: 2.2rem;
+}

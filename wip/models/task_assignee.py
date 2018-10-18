@@ -10,12 +10,16 @@ class TaskAssignee(models.Model):
     )
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        related_name='assigned_tasks'
     )
     allocated_hours = models.DecimalField(
         max_digits=10,
         decimal_places=2
     )
+    order = models.PositiveIntegerField(
+        default=0
+    )
 
     class Meta:
-        ordering = ['user']
+        ordering = ['order']

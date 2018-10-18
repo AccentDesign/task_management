@@ -26,7 +26,7 @@
                     {% if object.phone_number %}
                         <a href="tel:{{ object.phone_number }}" class="underline-dotted">{{ object.phone_number }}</a>
                         {% if user.is_gradwell_enabled %}
-                            <a href="" data-make-call-url="{% url 'wip:make-call' object.phone_number|cut:" " %}"><i class="icon-phone c-red"></i></a>
+                            <a href="" data-make-call-url="{% url 'api:makecall-call' %}" data-tel="{{ object.phone_number|cut:" " }}"><i class="icon-phone c-red"></i></a>
                         {% endif %}
                     {% endif %}
                 </p>

@@ -1,0 +1,117 @@
+<div class="modal {{ id ? 'in': '' }}" *ngIf="task$ | async as task" (click)="closeEvent($event)">
+    <div class="modal-panel" #modalPanel>
+        <div class="container">
+            <div class="row mb-2">
+                <div class="col-1 text-right">
+                    <span class="color-indicator mt-1" [style.background]="task._job?.colour"></span>
+                </div>
+                <div class="col-11">
+                    <div (click)="titleForm.editable = true">
+                        <input type="text" [formControl]="titleForm.controls.title" class="mb-0-5">
+                        <button class="input-group-addon button" *ngIf="titleForm.editable" (click)="titleForm.save($event)">Save</button>
+                        <button class="button button-clear" *ngIf="titleForm.editable" (click)="titleForm.cancel($event)">Cancel</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-8">
+                    <div class="mb-2">
+                        <p class="mb-0-5"><strong>Description</strong></p>
+                        <div (click)="descriptionForm.editable = true">
+                            <textarea autoResize [formControl]="descriptionForm.controls.description" class="transparent mb-0-5" rows="2"></textarea>
+                            <button class="button" *ngIf="descriptionForm.editable" (click)="descriptionForm.save($event)">Save</button>
+                            <button class="button button-clear" *ngIf="descriptionForm.editable" (click)="descriptionForm.cancel($event)">Cancel</button>
+                        </div>
+                    </div>
+
+                    <div class="mb-2">
+                        <p class="mb-0-5"><strong>Notes</strong></p>
+                        <textarea autoResize [formControl]="newNoteForm.controls.note" class="full-width mb-0-5" placeholder="Write a note..." rows="2"></textarea>
+                        <button class="button button-secondary" (click)="newNoteForm.save($event)">Add</button>
+                    </div>
+                    
+                    <ng-container *ngFor="let note of task._notes">
+                        <div class="my-1" *ngIf="getOrCreateEditNoteForm(note) as form">
+                            <div class="d-flex align-items-center mb-1">
+                                <div avatar [id]="note.user" class="avatar mr-1"></div>
+                                <div>{{ note.updated_at | date:'MMM d, y, h:mm a' }}</div>
+                            </div>
+                            <div (click)="form.editable = true">
+                                <textarea autoResize [formControl]="form.controls.note" class="panel" rows="1"></textarea>
+                            </div>
+                            <div class="small muted">
+                                <ng-container *ngIf="!form.editable">
+                                    <button class="button button-clear" (click)="$event.stopPropagation(); form.editable = true">Edit</button> |
+                                    <button class="button button-clear" *ngIf="!form.editable" (click)="form.delete($event)">Delete</button>
+                                </ng-container>
+                                <ng-container *ngIf="form.editable">
+                                    <button class="button button-secondary" (click)="form.save($event)">Save</button>
+                                    <button class="button button-clear" (click)="form.cancel($event)">Cancel</button>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+                <div class="col-4">
+                    <div (click)="jobForm.editable = true">
+                        <p class="mb-0-5"><strong>Job</strong></p>
+                        <select [disabled]="!jobForm.editable" class="full-width input-small" [(ngModel)]="selectedClientId" (change)="changeClient($event)">
+                            <option [value]="null">Select...</option>
+                            <option *ngFor="let option of clients$ | async" [value]="option.id">{{ option.name }}</option>
+                        </select>
+                        <select class="full-width input-small" [formControl]="jobForm.controls.job">
+                            <option [ngValue]="null">Select...</option>
+                            <ng-container *ngFor="let option of jobs$ | async">
+                                <option *ngIf="option.client == selectedClientId" [ngValue]="option.id">{{ option.title }}</option>
+                            </ng-container>
+                        </select>
+                        <ng-container *ngIf="jobForm.editable">
+                            <button class="button button-secondary" (click)="jobForm.save($event)">Save</button>
+                            <button class="button button-clear" (click)="jobForm.cancel($event)">Cancel</button>
+                        </ng-container>
+                    </div>
+                    <hr>
+                    
+                    <p class="mb-0-5"><strong>Assignees</strong></p>
+                    <div *ngFor="let assignee of task._assignees" class="d-inline-block text-center mr-0-5">
+                        <div avatar [id]="assignee.user" class="avatar pointer d-block" (click)="editAssignee(assignee)"></div>
+                        <small>{{ assignee.allocated_hours }}</small>
+                    </div>
+                    <div class="d-inline-block text-center mr-0-5">
+                        <div class="avatar new pointer d-block" (click)="editAssignee({task: task.id})">
+                            <div class="avatar-text"><i class="icon-plus"></i></div>
+                        </div>
+                        <small>&nbsp;</small>
+                    </div>
+                    <div *ngIf="assigneeEditForm && assigneeEditForm.editable" class="mt-1">
+                        <div class="input-group mb-0-5">
+                            <select [formControl]="assigneeEditForm.controls.user" class="input-small mr-1 flex-fill">
+                                <option [ngValue]="null">Select...</option>
+                                <ng-container *ngFor="let option of users$ | async">
+                                    <option [ngValue]="option.id">{{ option.full_name }}</option>
+                                </ng-container>
+                            </select>
+                            <input type="number" [formControl]="assigneeEditForm.controls.allocated_hours" class="input-small" style="flex: 0 1 7rem;">
+                        </div>
+                        <div class="d-flex">
+                            <button class="button button-secondary" (click)="assigneeEditForm.save($event)">Save</button>
+                            <button class="button button-clear" (click)="assigneeEditForm.cancel($event)">Cancel</button>
+                            <button class="button button-clear ml-auto" *ngIf="assigneeEditForm.value.id" (click)="assigneeEditForm.delete($event)">Delete</button>
+                        </div>
+                    </div>
+                    <hr>
+
+                    <p class="mb-0-5"><strong>Time Spent (hrs)</strong></p>
+                    <p>{{ task.time_spent_hours }} of {{ task._allocated_hours }}</p>
+                    <hr>
+                    <p class="mb-0-5"><strong>Target Date</strong></p>
+                    <div (click)="targetDateForm.editable = true">
+                        <input [formControl]="targetDateForm.controls.target_date" type="date" class="input-small">
+                        <button class="button" *ngIf="targetDateForm.editable" (click)="targetDateForm.save($event)">Save</button>
+                        <button class="button button-clear" *ngIf="targetDateForm.editable" (click)="targetDateForm.cancel($event)">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

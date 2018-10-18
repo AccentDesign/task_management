@@ -1,25 +1,38 @@
-from django.urls import path, include
+from django.urls import path
 
-from wip import api, routers, views
+from app import routers
+from wip import api, views
 
 
 # API
-API_TITLE = 'WIP API'
-API_DESCRIPTION = 'WIP API Documentation'
-
 router = routers.DefaultRouter()
+router.register(r'billing-frequencies', api.BillingFrequencyViewSet, base_name='billingfrequency')
 router.register(r'clients', api.ClientViewSet)
+router.register(r'client-contacts', api.ClientContactViewSet)
 router.register(r'jobs', api.JobViewSet)
+router.register(r'job-files', api.JobFileViewSet)
+router.register(r'job-notes', api.JobNoteViewSet)
+router.register(r'job-recurring-costs', api.JobRecurringCostViewSet)
+router.register(r'job-relationships', api.JobRelationshipViewSet)
+router.register(r'job-statuses', api.JobStatusViewSet)
+router.register(r'job-types', api.JobTypeViewSet)
+router.register(r'make-call', api.MakeCallViewSet, base_name='makecall')
+router.register(r'payment-options', api.PaymentOptionViewSet)
+router.register(r'positions', api.PositionViewSet)
+router.register(r'recurring-cost-type', api.RecurringCostTypeViewSet)
+router.register(r'relationships', api.RelationshipViewSet)
 router.register(r'tasks', api.TaskViewSet)
+router.register(r'task-assignees', api.TaskAssigneeViewSet)
+router.register(r'task-notes', api.TaskNoteViewSet)
+router.register(r'task-statuses', api.TaskStatusViewSet)
+router.register(r'users', api.UserViewSet)
 router.register(r'time-daily-signoff', api.TimeDailySignoffViewSet)
 router.register(r'time-entries', api.TimeEntryViewSet)
 
 # DESKTOP
 app_name = 'wip'
 urlpatterns = [
-    path('api/', include(router.urls)),
-    path('make-call/<telephone_number>/', views.MakeCall.as_view(), name='make-call'),
-    path('clients/', views.ClientList.as_view(), name='client-list-view'),
+    path('clients/', views.ClientList.as_view(), name='client-list'),
     path('clients/<int:pk>/', views.ClientDetail.as_view(), name='client-detail'),
     path('clients/create/', views.ClientCreate.as_view(), name='client-create'),
     path('clients/<int:pk>/update/', views.ClientUpdate.as_view(), name='client-update'),
@@ -28,7 +41,6 @@ urlpatterns = [
     path('clients/<int:pk>/jobs/create/', views.JobCreate.as_view(), name='job-create'),
     path('client-contacts/<int:pk>/update/', views.ClientContactUpdate.as_view(), name='clientcontact-update'),
     path('client-contacts/<int:pk>/delete/', views.ClientContactDelete.as_view(), name='clientcontact-delete'),
-    path('timesheet/', views.Timesheet.as_view(), name='timesheet'),
     path('jobs/<int:pk>/', views.JobDetail.as_view(), name='job-detail'),
     path('jobs/<int:pk>/update/', views.JobUpdate.as_view(), name='job-update'),
     path('jobs/<int:pk>/delete/', views.JobDelete.as_view(), name='job-delete'),
@@ -50,4 +62,6 @@ urlpatterns = [
     path('tasks/<int:pk>/notes/create/', views.TaskNoteCreate.as_view(), name='tasknote-create'),
     path('task-notes/<int:pk>/update/', views.TaskNoteUpdate.as_view(), name='tasknote-update'),
     path('task-notes/<int:pk>/delete/', views.TaskNoteDelete.as_view(), name='tasknote-delete'),
+    path('taskboard/', views.TaskBoard.as_view(), name='taskboard'),
+    path('timesheet/', views.Timesheet.as_view(), name='timesheet'),
 ]

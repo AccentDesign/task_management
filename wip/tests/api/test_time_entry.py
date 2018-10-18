@@ -17,7 +17,7 @@ class TestAPI(AppTestCase):
         self.user = self.create_user()
         self.client = APIClient()
         self.client.force_login(self.user)
-        self.base_url = reverse('wip:timeentry-list')
+        self.base_url = reverse('api:timeentry-list')
         self._create_test_object()
 
     def _create_test_object(self):

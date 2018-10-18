@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load i18n static wip_tags %}
+{% block page_title %}Taskboard{% endblock %}
+{% block body_class %}d-flex full-height flex-column{% endblock %}
+{% block inner_content %}
+    <app-root></app-root>
+{% endblock %}
+
+{% block extra_css %}
+    <style>html { height: 100%; }</style>
+{% endblock %}
+
+{% block extra_js %}
+    <script> if (global === undefined) { var global = window; } </script>
+    <script type="text/javascript" src="{% static 'dist/js/frontend/runtime.js' %}"></script>
+    <script type="text/javascript" src="{% static 'dist/js/frontend/polyfills.js' %}"></script>
+    <script type="text/javascript" src="{% static 'dist/js/frontend/styles.js' %}"></script>
+    {% is_debug_mode as is_debug %}
+    {% if is_debug %}<script type="text/javascript" src="{% static 'dist/js/frontend/vendor.js' %}"></script>{% endif %}
+    <script type="text/javascript" src="{% static 'dist/js/frontend/main.js' %}"></script>
+{% endblock %}

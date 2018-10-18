@@ -1,3 +1,4 @@
+from datetime import datetime, timedelta
 from decimal import Decimal
 
 from django.db import models
@@ -108,3 +109,16 @@ class TestModel(AppTestCase):
         task = Task.objects.get(pk=1)
 
         self.assertEqual(task.time_spent_hours, Decimal('0.50'))
+
+    def test_is_overdue(self):
+        task = Task()
+        self.assertFalse(task.is_overdue)
+
+        task = Task(target_date=datetime.today().date())
+        self.assertFalse(task.is_overdue)
+
+        task = Task(target_date=datetime.today().date() - timedelta(days=1), closed=True)
+        self.assertFalse(task.is_overdue)
+
+        task = Task(target_date=datetime.today().date() - timedelta(days=1))
+        self.assertTrue(task.is_overdue)

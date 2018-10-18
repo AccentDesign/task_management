@@ -12,13 +12,13 @@ class ClientCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     fields = '__all__'
     model = Client
     success_message = "Created successfully"
-    success_url = reverse_lazy('wip:client-list-view')
+    success_url = reverse_lazy('wip:client-list')
     template_name = 'wip/client_add.html'
 
 
 class ClientDelete(LoginRequiredMixin, ProtectedDeleteMixin, DeleteMessageMixin, DeleteView):
     model = Client
-    success_url = reverse_lazy('wip:client-list-view')
+    success_url = reverse_lazy('wip:client-list')
 
 
 class ClientDetail(LoginRequiredMixin, DetailView):

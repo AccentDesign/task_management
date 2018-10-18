@@ -24,7 +24,7 @@
                 <p class="strong">{% trans 'Description' %}</p>
                 {{ object.description|default:'-'|linebreaks }}
                 <hr/>
-                <p class="strong">{% trans 'Time Spent (hrs)' %}</p>
+                <p class="strong">{% trans 'Time Spent (hours)' %}</p>
                 <p>{{ object.time_spent_hours }} of {{ object.allocated_hours }}</p>
                 <hr/>
                 <p class="strong">{% trans 'Status' %}</p>
@@ -53,7 +53,7 @@
                             <a class="button button-primary" href="{% url 'wip:tasknote-create' object.pk %}">{% trans 'Add' %}</a>
                         </div>
                         {% for note in object.notes.all %}
-                            <p>{{ note.user.get_full_name }} - {{ note.created_at }}</p>
+                            <p>{{ note.user.get_full_name }} - {{ note.updated_at }}</p>
                             <div class="comment">{{ note.note|linebreaks }}</td></div>
                             <span class="small muted">
                                 <a href="{{ note.get_update_url }}" class="underline-dotted">{% trans 'Edit' %}</a> |

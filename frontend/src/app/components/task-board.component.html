@@ -1,0 +1,42 @@
+<div class="page-header py-2">
+    <div class="container-fluid d-flex align-items-center c-white">
+        <div class="h2 mr-2">Taskboard</div>
+        <ng-container *ngIf="this.statsForTaskboard$ | async as stats">
+            <div class="mr-2"><strong>Number of tasks</strong> {{ stats.count_of_tasks }}</div>
+            <div class="mr-2"><strong>Allocated hours</strong> {{ stats.allocated_hours }}</div>
+            <div><strong>Overdue tasks</strong> {{ stats.count_of_overdue }}</div>
+        </ng-container>
+        <div class="page-header-actions">
+            <task-board-filter></task-board-filter>
+        </div>
+    </div>
+</div>
+<div class="container-fluid d-flex flex-fill mt-2 mb-1 scroll-x">
+    <div class="board-column d-flex flex-fill" *ngFor="let status of taskAssigneesForTaskboard$ | async">
+        <div class="board-column-heading d-flex mb-1">
+            <strong>{{ status.title }}</strong>
+            <i class="icon-plus ml-auto" (click)="openCreateForm(status)"></i>
+        </div>
+        <div class="flex-fill board-card-wrapper" 
+            ngxDroppable="status-column" [model]="status._assignees"
+            (drop)="droppedIntoColumn(status, status._assignees)">
+            <div task-card [id]="assignee.task"
+                ngxDraggable [model]="assignee"
+                (click)="selectedTaskId=assignee.task"
+                *ngFor="let assignee of status._assignees">
+            </div>
+        </div>
+    </div>
+</div>    
+<task-create-form
+    [opened]="createFormOpen"
+    [status]="createFormStatusId"
+    (close)="createFormOpen = false"
+    (saved)="selectedTaskId = $event.id"
+    *ngIf="createFormOpen">
+</task-create-form>
+<task-form
+    [id]="selectedTaskId"
+    (close)="selectedTaskId = null"
+    *ngIf="selectedTaskId">
+</task-form>

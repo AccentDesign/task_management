@@ -1,11 +1,12 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
 from django.template import loader
-from django.views.generic import TemplateView
+from django.views.generic import RedirectView
 
 
-class Home(LoginRequiredMixin, TemplateView):
-    template_name = 'home.html'
+class Home(LoginRequiredMixin, RedirectView):
+    pattern_name = 'wip:taskboard'
+    permanent = True
 
 
 def error404(request, exception):

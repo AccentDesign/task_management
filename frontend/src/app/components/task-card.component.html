@@ -1,0 +1,16 @@
+<div class="board-card d-flex flex-column pointer" *ngIf="task$ | async as task">
+    <div class="d-flex align-items-center">
+        <span class="color-indicator" [style.background]="task._job?.colour"></span>
+        <span class="small uppercase"><strong>{{ task._job?._client?.name }} / {{ task._job?.title }}</strong></span>
+    </div>
+    <p class="board-card-desc">{{ task.title }}</p>
+    <div class="d-flex">
+        <div class="mr-auto">
+            <span class="uppercase mr-1" [class.c-red]="task.is_overdue" *ngIf="task.target_date"><i class="icon-bell"></i> {{ task.target_date | date:'d MMM' }}</span>
+            <span class="uppercase" [class.c-red]="task.time_spent_hours > task._allocated_hours"><i class="icon-clock"></i> {{ task.time_spent_hours }}/{{ task._allocated_hours }}</span>
+        </div>
+        <div>
+            <div avatar [id]="assignee.user" class="avatar avatar-small" *ngFor="let assignee of task._assignees"></div>
+        </div>
+    </div>
+</div>

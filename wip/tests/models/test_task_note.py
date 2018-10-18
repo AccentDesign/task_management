@@ -38,7 +38,7 @@ class ModelTests(AppTestCase):
     # meta
 
     def test_ordering(self):
-        self.assertEqual(TaskNote._meta.ordering, ['-created_at'])
+        self.assertEqual(TaskNote._meta.ordering, ['-updated_at'])
 
     # properties
 

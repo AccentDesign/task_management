@@ -69,7 +69,7 @@
     fields: {
       title: "Website Updates",
       description: "Lorem ipsum dolor sit amet, doctus accommodare vix et. Qui falli splendide te, solum ipsum novum ei qui, mea ei nisl sanctus quaestio.",
-      created_at: "2018-01-01T00:00:00.000Z",
+      created_at: "2018-01-01T00:00:00.000000+01:00",
       client: 1,
       type: 1,
       estimated_hours: 0,
@@ -126,8 +126,8 @@
     fields: {
       job: 1,
       user: 1,
-      created_at: "2018-01-01T00:00:00.000Z",
-      updated_at: "2018-01-01T00:00:00.000Z",
+      created_at: "2018-01-01T00:00:00.000000+01:00",
+      updated_at: "2018-01-01T00:00:00.000000+01:00",
       note: "Lorem ipsum dolor sit amet, no magna vidisse vix. Eu novum error maiestatis duo, no ubique alienum usu, vim graeco vituperatoribus no. Postulant tractatos argumentum ad pro, nibh modus liberavisse no nec. Persius rationibus et sit, primis periculis cum ne. Habeo ponderum ius te, tation neglegentur usu ex. Te unum habeo vituperata vix. Eos ex magna denique accusata, nam modus conclusionemque no."
     }
 
@@ -145,7 +145,7 @@
     fields: {
       job: 1,
       title: "Update some bits and bobs",
-      created_at: "2018-01-01T00:00:00.000Z",
+      created_at: "2018-01-01T00:00:00.000000+01:00",
       description: "Lorem ipsum dolor sit amet, doctus accommodare vix et. Qui falli splendide te, solum ipsum novum ei qui, mea ei nisl sanctus quaestio.",
       status: 1,
       target_date: "2018-01-01",
@@ -160,7 +160,8 @@
     fields: {
       task: 1,
       user: 1,
-      allocated_hours: "10.00"
+      allocated_hours: "10.00",
+      order: 0
     }
 
 -
@@ -169,8 +170,8 @@
     fields: {
       task: 1,
       user: 1,
-      created_at: "2018-01-01T00:00:00.000Z",
-      updated_at: "2018-01-01T00:00:00.000Z",
+      created_at: "2018-01-01T00:00:00.000000+01:00",
+      updated_at: "2018-01-01T00:00:00.000000+01:00",
       note: "Lorem ipsum dolor sit amet, no magna vidisse vix. Eu novum error maiestatis duo, no ubique alienum usu, vim graeco vituperatoribus no. Postulant tractatos argumentum ad pro, nibh modus liberavisse no nec. Persius rationibus et sit, primis periculis cum ne. Habeo ponderum ius te, tation neglegentur usu ex. Te unum habeo vituperata vix. Eos ex magna denique accusata, nam modus conclusionemque no."
     }
 

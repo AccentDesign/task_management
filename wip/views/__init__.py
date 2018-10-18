@@ -1,6 +1,3 @@
-from .make_call import (
-    MakeCall
-)
 from .client import (
     ClientCreate,
     ClientDelete,
@@ -50,6 +47,9 @@ from .task_note import (
     TaskNoteCreate,
     TaskNoteDelete,
     TaskNoteUpdate
+)
+from .taskboard import (
+    TaskBoard
 )
 from .timesheet import (
     Timesheet

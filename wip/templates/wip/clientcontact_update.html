@@ -31,7 +31,7 @@
                                     {{ field }}
                                     {% if field.value %}
                                         <div class="input-group-addon">
-                                            <a href="" data-make-call-url="{% url 'wip:make-call' field.value|cut:" " %}"><i class="icon-phone c-red"></i></a>
+                                            <a href="" data-make-call-url="{% url 'api:makecall-call' %}" data-tel="{{ field.value|cut:" " }}"><i class="icon-phone c-red"></i></a>
                                         </div>
                                     {% endif %}
                                 </div>

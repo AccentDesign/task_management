@@ -7,8 +7,12 @@ from wip.models import Task, TaskAssignee
 class TaskAssigneeForm(forms.ModelForm):
 
     class Meta:
-        exclude = ['task']
         model = TaskAssignee
+        fields = [
+            'id',
+            'user',
+            'allocated_hours'
+        ]
 
 
 TaskAssigneeFormSet = forms.inlineformset_factory(

@@ -1,0 +1,31 @@
+// modal
+// ------------------------------------------
+
+.modal {
+  @include position(0,0,0,0);
+  display: none;
+  overflow-y: auto;
+  background-color: color-a("primary", .87);
+}
+
+.modal.in {
+  display: block;
+}
+
+.modal-panel {
+  max-width: 800px;
+  padding: 2rem;
+  margin: auto;
+  margin-top: 4rem;
+  background-color: color("secondary");
+
+  .button-secondary {
+    @include button-hover(color("primary"), color("white"), color("shadylady"));
+  }
+
+  .panel {
+    padding: 2rem;
+    margin-bottom: .5rem;
+  }
+
+}

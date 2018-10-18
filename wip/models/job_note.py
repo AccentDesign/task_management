@@ -26,7 +26,7 @@ class JobNote(models.Model):
     note = models.TextField()
 
     class Meta:
-        ordering = ['-created_at']
+        ordering = ['-updated_at']
 
     def get_update_url(self):
         return reverse_lazy('wip:jobnote-update', kwargs={'pk': self.pk})

@@ -1,0 +1,48 @@
+// board
+// ------------------------------------------
+
+.board-column {
+  flex-direction: column;
+  min-width: 355px;
+  max-width: 355px;
+  padding: 8px;
+  margin-right: 2rem;
+  border: $border-width solid color-a("black", .12);
+  border-radius: 6px;
+}
+
+.board-column-heading {
+  font-size: 14px;
+}
+
+.board-column-heading .icon-plus {
+  font-size: 14px;
+}
+
+.board-card-wrapper {
+  overflow-y: auto;
+}
+
+.board-card {
+  padding: 1rem;
+  margin-top: .5rem;
+  margin-bottom: .5rem;
+  background: color("white");
+  border-radius: 6px;
+  @include box-shadow(0, 1px, 1px, rgba(0, 0, 0, .12));
+
+  .color-indicator {
+    width: 1.2rem;
+    min-width: 1.2rem;
+    height: 1.2rem;
+    border: 0;
+  }
+}
+
+.board-card-desc {
+  margin: 1rem 0;
+  font-size: 14px;
+  line-height: 1.8rem;
+}
+
+

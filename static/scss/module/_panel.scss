@@ -17,3 +17,21 @@
   }
 
 }
+
+.filter-box {
+  position: relative;
+}
+
+.filter-box .filter-options {
+  @include box-shadow(0, 1px, 1px, rgba(0, 0, 0, .12));
+  @include position($right: -11px, $top: calc(100% + 10px));
+  min-width: 30rem;
+  padding: 1.5rem;
+  color: initial;
+  background-color: color("secondary");
+
+  &::before {
+    @include css-triangle(color("secondary"), up, 10px);
+    @include position($right: 10px, $top: -10px);
+  }
+}

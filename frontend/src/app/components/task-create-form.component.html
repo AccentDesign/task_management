@@ -1,0 +1,37 @@
+<div class="modal {{ opened ? 'in': '' }}" (click)="closeEvent($event)">
+    <div class="modal-panel" #modalPanel>
+        <div class="container">
+            <div class="row mb-2">
+                <div class="col">
+                    <input type="text" [formControl]="form.controls.title" class="mb-0-5" placeholder="Title">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-8">
+                    <div class="mb-2">
+                        <p class="mb-0-5"><strong>Description</strong></p>
+                        <textarea autoResize [formControl]="form.controls.description" class="mb-0-5" rows="2"></textarea>
+                    </div>
+                    <button class="button" (click)="form.save($event)">Save</button>
+                </div>
+                <div class="col-4">
+                    <p class="mb-0-5"><strong>Job</strong></p>
+                    <select class="full-width input-small" [(ngModel)]="selectedClientId" (change)="changeClient($event)">
+                        <option [value]="null">Select...</option>
+                        <option *ngFor="let option of clients$ | async" [value]="option.id">{{ option.name }}</option>
+                    </select>
+                    <select class="full-width input-small" [formControl]="form.controls.job">
+                        <option [ngValue]="null">Select...</option>
+                        <ng-container *ngFor="let option of jobs$ | async">
+                            <option *ngIf="option.client == selectedClientId" [ngValue]="option.id">{{ option.title }}</option>
+                        </ng-container>
+                    </select>
+                    <hr>
+
+                    <p class="mb-0-5"><strong>Target Date</strong></p>
+                    <input [formControl]="form.controls.target_date" type="date" class="input-small">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

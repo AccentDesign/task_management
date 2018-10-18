@@ -67,19 +67,21 @@
                         <table class="table-hover table-headed margin-zero">
                             <thead>
                                 <tr>
+                                    <th class="keep-min-width"></th>
                                     <th class="keep-min-width">{% trans 'ID' %}</th>
                                     <th>{% trans 'Title' %}</th>
                                     <th class="keep-min-width">{% trans 'Tags' %}</th>
                                     <th class="keep-min-width">{% trans 'Assignees' %}</th>
-                                    <th class="keep-min-width">{% trans 'Time (hrs)' %}</th>
+                                    <th class="keep-min-width">{% trans 'Time Spent (hours)' %}</th>
                                     <th class="keep-min-width">{% trans 'Target Date' %}</th>
                                     <th class="keep-min-width">{% trans 'Status' %}</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="sortable">
                                 {% for task in object.tasks.all %}
                                     {% if not task.closed %}
-                                        <tr data-url="{{ task.get_absolute_url }}">
+                                        <tr data-id="{{ task.id }}" data-url="{{ task.get_absolute_url }}">
+                                            <td class="keep-min-width"><i class="icon-menu"></i></td>
                                             <td class="keep-min-width">{{ task.pk }}</td>
                                             <td>{{ task.title }}</td>
                                             <td class="keep-min-width"><ul class="tags">{% for tag in task.tags.all %}<li class="tag">{{ tag }}</li>{% empty %}<li>-</li>{% endfor %}</ul></td>
@@ -111,7 +113,7 @@
                             <a class="button button-primary" href="{% url 'wip:jobnote-create' object.pk %}">{% trans 'Add' %}</a>
                         </div>
                         {% for note in object.notes.all %}
-                            <p>{{ note.user.get_full_name }} - {{ note.created_at }}</p>
+                            <p>{{ note.user.get_full_name }} - {{ note.updated_at }}</p>
                             <div class="comment">{{ note.note|linebreaks }}</td></div>
                             <span class="small muted">
                                 <a href="{{ note.get_update_url }}" class="underline-dotted">{% trans 'Edit' %}</a> |
@@ -201,10 +203,11 @@
 {% endblock %}
 
 {% block extra_js %}
-    <script src="{% static 'dist/vendor/dropzone/dropzone.min.js' %}"></script>
-    <script src="{% static 'dist/js/tabs.min.js' %}"></script>
-    <script>$('.tabs').tabs();</script>
+    <script type="text/javascript" src="{% static 'dist/vendor/jqueryui/jquery-ui.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'dist/vendor/dropzone/dropzone.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'dist/js/tabs.min.js' %}"></script>
     <script>
+        // dropzone options
         Dropzone.options.filesDropzone = {
             maxFilesize: 5,
             init: function() {
@@ -221,6 +224,32 @@
                     table.append(html);
                 });
             }
-        }
+        };
+
+        $( function() {
+            // tabs
+            $('.tabs').tabs();
+            // sortable tasks
+            $('.sortable').sortable({
+                stop: function (event, ui) {
+                    var _this = $(this);
+                    $.ajax({
+                        type: "POST",
+                        url: "{% url 'api:job-sort-tasks' object.pk %}",
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json',
+                            'X-CSRFToken': '{{ csrf_token }}'
+                        },
+                        data: JSON.stringify({
+                            tasks: _this.sortable('toArray', {attribute: "data-id"})
+                        }),
+                        error: function (err) {
+                            _this.sortable('cancel');
+                        }
+                    });
+                }
+            });
+        });
     </script>
 {% endblock %}
