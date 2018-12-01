@@ -27,6 +27,8 @@ $colors: (
   "dodgerblue":           rgb(51, 191, 255),
   "whitelilac":           rgb(240, 240, 241),
   "wildwillow":           rgb(162, 207, 110),
+  "gainsboro":            rgb(226, 226, 226),
+  "lightgrey":            rgb(210, 210, 210),
 );
 $body-background:         map_get($colors, "whitelilac");
 

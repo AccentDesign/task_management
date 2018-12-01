@@ -16,18 +16,13 @@
   background-color: color-a("primary", .24);
 }
 
-.client-list .task:hover {
-  border: 1px solid color-a("primary", .12);
-  @include box-shadow(0, 1px, 2px, rgba(0, 0, 0, .24));
-}
-
 .client-list .client {
   display: block;
   padding: 1rem 1rem;
   margin-bottom: .3rem;
   font-weight: 700;
   cursor: pointer;
-  background-color: color-a("primary", .12);
+  background-color: color("gainsboro");
 }
 
 .client-list .job {
@@ -42,12 +37,20 @@
   padding: 0;
   margin-bottom: .3rem;
   cursor: pointer;
-  border: 1px solid color-a("primary", 0);
+  background-color: color("lightgrey");
   border-radius: .25rem;
+  &:hover {
+    @include box-shadow(0, 1px, 2px, rgba(0, 0, 0, .24));
+  }
+}
+
+.client-list .task .color-indicator {
+  margin-top: 1.2rem;
+  margin-left: 1rem;
 }
 
 .client-list .task span {
-  padding: 1rem;
+  padding: 1rem 1rem 1rem 0;
 }
 
 .timesheet {

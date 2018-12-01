@@ -1257,6 +1257,11 @@ input[type="checkbox"], input[type="radio"] {
   opacity: 1;
 }
 
+:-ms-input-placeholder {
+  color: #b9b9b9;
+  opacity: 1;
+}
+
 ::-ms-input-placeholder {
   color: #b9b9b9;
   opacity: 1;
@@ -2428,6 +2433,22 @@ a.c-wildwillow:hover {
   color: #6fa235;
 }
 
+a.c-gainsboro {
+  color: #e2e2e2;
+}
+
+a.c-gainsboro:hover {
+  color: #afafaf;
+}
+
+a.c-lightgrey {
+  color: #d2d2d2;
+}
+
+a.c-lightgrey:hover {
+  color: #9f9f9f;
+}
+
 .loading-splash {
   position: absolute;
   top: 0;
@@ -2712,18 +2733,13 @@ td textarea {
   background-color: rgba(41, 44, 54, 0.24);
 }
 
-.client-list .task:hover {
-  border: 1px solid rgba(41, 44, 54, 0.12);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.24);
-}
-
 .client-list .client {
   display: block;
   padding: 1rem 1rem;
   margin-bottom: .3rem;
   font-weight: 700;
   cursor: pointer;
-  background-color: rgba(41, 44, 54, 0.12);
+  background-color: #e2e2e2;
 }
 
 .client-list .job {
@@ -2738,12 +2754,21 @@ td textarea {
   padding: 0;
   margin-bottom: .3rem;
   cursor: pointer;
-  border: 1px solid rgba(41, 44, 54, 0);
+  background-color: #d2d2d2;
   border-radius: .25rem;
 }
 
+.client-list .task:hover {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.client-list .task .color-indicator {
+  margin-top: 1.2rem;
+  margin-left: 1rem;
+}
+
 .client-list .task span {
-  padding: 1rem;
+  padding: 1rem 1rem 1rem 0;
 }
 
 .timesheet {
@@ -3215,6 +3240,22 @@ td textarea {
 
 .c-wildwillow {
   color: #a2cf6e;
+}
+
+.b-gainsboro {
+  background-color: #e2e2e2;
+}
+
+.c-gainsboro {
+  color: #e2e2e2;
+}
+
+.b-lightgrey {
+  background-color: #d2d2d2;
+}
+
+.c-lightgrey {
+  color: #d2d2d2;
 }
 
 .disabled {
