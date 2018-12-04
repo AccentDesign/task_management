@@ -1,20 +1,10 @@
-import {
-    AfterViewChecked,
-    Component,
-    DoCheck,
-    ElementRef,
-    EventEmitter,
-    Input,
-    IterableDiffers,
-    OnChanges,
-    OnDestroy,
-    OnInit,
-    Output,
-    SimpleChanges
-} from '@angular/core';
-import { Calendar, Draggable } from 'fullcalendar'
-
+import { Calendar, Draggable } from 'fullcalendar';
 import EventApi from 'fullcalendar/EventApi';
+
+import {
+    AfterViewChecked, Component, DoCheck, ElementRef, EventEmitter, HostListener, Input,
+    IterableDiffers, OnChanges, OnDestroy, OnInit, Output, SimpleChanges
+} from '@angular/core';
 
 export interface ViewSkeletonRenderInfo {
     view: any;
@@ -214,6 +204,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, D
     initialized: boolean;
     eventDiffer: any;
     config: any;
+    copyableDraggable: Draggable;
   
     constructor(private el: ElementRef, differs: IterableDiffers) {
         this.eventDiffer = differs.find([]).create(null);
@@ -283,11 +274,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, D
     ngDoCheck() {
         const eventChanges = this.eventDiffer.diff(this.events);
         if (this.calendar && eventChanges) {
-            const sources = this.calendar.getEventSources();
-            sources.forEach(source => { source.remove(); });
-            if (this.events) {
-                this.calendar.addEventSource(this.events);
-            }
+            this.setEvents();
         }
     }
   
@@ -307,13 +294,23 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, D
         // is not doing as expected
         setTimeout(() => this.calendar.updateSize(), 0);
 
-        if (this.events) {
-            this.calendar.addEventSource(this.events);
-        }
+        this.setEvents();
         
         this.initialized = true;
     }
-  
+    
+    private setEvents() {
+        this.calendar.removeAllEventSources();
+        if (this.events) {
+            let source = {
+                events: this.events,
+                startEditable: this.eventStartEditable,
+                durationEditable: this.eventDurationEditable
+            }
+            this.calendar.addEventSource(source);
+        }
+    }
+
     private safeGenerateConfig() {
         const configFromAttrs = {
             // tslint:disable:no-non-null-assertion
@@ -367,5 +364,30 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewChecked, D
     removeUndefinedProperties<T>(object: Object): T {
         return JSON.parse(JSON.stringify(typeof object === 'object' ? object : {}));
     }
-  
+
+    @HostListener('document:keydown.alt', ['$event'])
+    enableCopy(event: KeyboardEvent) {
+        this.eventStartEditable = false;
+        this.eventDurationEditable = false;
+        this.setEvents();
+
+        if (this.copyableDraggable) {
+            this.copyableDraggable.destroy();
+        }
+        
+        this.copyableDraggable = new Draggable(this.el.nativeElement, {
+            itemSelector: '.fc-event'
+        });
+    }
+
+    @HostListener('document:keyup.alt', ['$event'])
+    disableCopy(event: KeyboardEvent) {
+        this.eventStartEditable = true;
+        this.eventDurationEditable = true;
+        this.setEvents();
+
+        if (this.copyableDraggable) {
+            this.copyableDraggable.destroy();
+        }
+    }
 }

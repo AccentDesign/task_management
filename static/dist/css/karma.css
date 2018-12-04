@@ -2706,6 +2706,7 @@ td textarea {
   border: dotted 1px #292c36;
 }
 
+/* stylelint-disable declaration-no-important, selector-pseudo-element-colon-notation */
 .client-list-wrapper {
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
@@ -2774,16 +2775,9 @@ td textarea {
   margin-bottom: 0;
 }
 
-.fc-dailycontrol {
-  margin: 0;
-}
-
-.fc-dailycontrol label {
-  padding-right: 0;
-}
-
-.fc-dailycontrol input {
-  display: none;
+body > .fc-event.fc-dragging {
+  background: transparent !important;
+  border: none !important;
 }
 
 .timesheet-event-overlay {
@@ -2820,7 +2814,6 @@ td textarea {
   padding: 1.5rem;
 }
 
-/* stylelint-disable declaration-no-important, selector-pseudo-element-colon-notation */
 .fc-state-default {
   text-shadow: none !important;
   background-image: none !important;

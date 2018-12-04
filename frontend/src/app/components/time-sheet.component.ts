@@ -1,5 +1,6 @@
 import * as actions from '../state/actions';
 import * as moment from 'moment';
+import * as _ from 'lodash';
 import { ActionsSubject, select, Store } from '@ngrx/store';
 import { AppState } from '../state/state';
 import {
@@ -119,9 +120,10 @@ export class TimesheetComponent implements OnInit {
     }
 
     onDrop(info: DropInfo) {
+        const props = _.get(info.draggedEl, 'fcSeg.eventRange.def.extendedProps') || _.get(info.draggedEl, 'dataset');
         const payload: any = {
             user: this.selectedUserId,
-            task: info.draggedEl.dataset.task,
+            task: props.task,
             started_at: moment(info.date).toISOString(),
             ended_at: moment(info.date).add(5, 'minutes').toISOString(),
             signed_off: false
