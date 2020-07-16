@@ -33,7 +33,7 @@
     "dom-autoscroller": "^2.3.4",
     "dragula": "^3.7.2",
     "fullcalendar": "4.0.0-alpha.4",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.19",
     "moment": "^2.24.0",
     "ngx-dropzone-wrapper": "^7.2.1",
     "rxjs": "~6.3.3",
