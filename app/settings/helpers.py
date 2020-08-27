@@ -18,10 +18,6 @@ def env_mode():
         return 'STAGING'
 
 
-def huey_eager():
-    return env_mode() == 'DEV' or sys.argv[1:2] == ['test']
-
-
 def show_toolbar(request):
     """
     Force debug toolbar due to issue inside docker from external to container.

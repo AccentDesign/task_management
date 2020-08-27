@@ -3,7 +3,7 @@ from os.path import join
 
 from django.urls import reverse_lazy
 
-from .helpers import BASE_DIR, huey_eager
+from .helpers import BASE_DIR
 
 
 # Security
@@ -35,7 +35,6 @@ INSTALLED_APPS = [
     'dal',
     'dal_select2',
     'django_filters',
-    'huey.contrib.djhuey',
     'rest_framework',
     'reversion',
     'storages',
@@ -210,41 +209,6 @@ REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': (
         'rest_framework.renderers.JSONRenderer',
     )
-}
-
-
-# huey
-
-HUEY = {
-    'name': 'task-management',
-    'result_store': True,
-    'events': True,
-    'store_none': False,
-    'always_eager': huey_eager(),
-    'store_errors': True,
-    'blocking': False,
-    'backend_class': 'huey.RedisHuey',
-    'connection': {
-        'host': environ.get('REDIS_HOST', 'localhost'),
-        'port': 6379,
-        'db': 0,
-        'connection_pool': None,
-        'read_timeout': 1,
-        'max_errors': 1000,
-        'url': None,
-    },
-    'consumer': {
-        'workers': 1,
-        'worker_type': 'thread',
-        'initial_delay': 0.1,
-        'backoff': 1.15,
-        'max_delay': 10.0,
-        'utc': True,
-        'scheduler_interval': 1,
-        'periodic': True,
-        'check_worker_health': True,
-        'health_check_interval': 1,
-    },
 }
 
 
