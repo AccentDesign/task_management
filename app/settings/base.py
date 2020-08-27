@@ -225,7 +225,7 @@ HUEY = {
     'blocking': False,
     'backend_class': 'huey.RedisHuey',
     'connection': {
-        'host': 'redis',
+        'host': environ.get('REDIS_HOST', 'localhost'),
         'port': 6379,
         'db': 0,
         'connection_pool': None,
