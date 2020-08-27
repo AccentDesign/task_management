@@ -39,9 +39,9 @@ def send_email(task, to, reply_to, notify_relationships, notify_assignees):
     """ Send an email. """
 
     # setup the email content
-    subject = f'WIP - Task "{task.status}" for "{task.job}"'
+    subject = f'WIP - Task "{task.status}" for "{task.job.client} - {task.job}"'
     url = f'{HOST}/clients/{task.job.client_id}/jobs/{task.job_id}?task={task.id}'
-    body = f'Task "{task.status}" for "{task.job}".\n\n{task.title}\n\n{url}'
+    body = f'Task "{task.status}" for "{task.job.client} - {task.job}".\n\n{task.title}\n\n{url}'
 
     to_addresses = []
     if to:
