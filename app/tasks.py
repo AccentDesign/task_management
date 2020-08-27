@@ -183,6 +183,6 @@ def timesheet_reminder(channel, name, check_range):
 def post_slack_message(payload):
     settings = WIPSettings.load()
     requests.post(
-        f'https://slack.com/api/chat.postMessage',
+        'https://slack.com/api/chat.postMessage',
         json=payload,
         headers={'Authorization': f'Bearer {settings.slack_authentication_token}'})
