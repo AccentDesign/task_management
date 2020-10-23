@@ -28,6 +28,7 @@ INSTALLED_APPS = [
 
     'app',
     'authentication',
+    'hosting',
     'reporting',
     'wip',
 
