@@ -2,8 +2,8 @@
 Task Management (WIP)
 *********************
 
-.. image:: https://circleci.com/gh/AccentDesign/task_management.svg?style=svg&circle-token=c9f7d668fa755388041c88f87b2a92aab935d3f8
-    :target: https://circleci.com/gh/AccentDesign/task_management
+.. image:: https://github.com/AccentDesign/task_management/workflows/Testing%20Workflow/badge.svg
+    :target: https://github.com/AccentDesign/task_management/actions?query=workflow%3A%22Testing+Workflow%22
 
 
 Description
