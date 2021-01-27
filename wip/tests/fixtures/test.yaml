@@ -162,6 +162,7 @@
       created_at: "2019-04-01T00:00:00.000000+01:00",
       created_by: 1,
       description: "Lorem ipsum dolor sit amet, doctus accommodare vix et. Qui falli splendide te, solum ipsum novum ei qui, mea ei nisl sanctus quaestio.",
+      current_status: "Lorem ipsum dolor sit amet",
       status: 1,
       target_date: "2018-01-01",
       closed: false,

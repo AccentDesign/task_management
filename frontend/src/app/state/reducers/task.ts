@@ -8,6 +8,7 @@ export interface ITask {
     id?: number;
     title: string;
     description?: string;
+    current_status?: string;
     created_at?: string;
     created_by?: number;
     job: number;

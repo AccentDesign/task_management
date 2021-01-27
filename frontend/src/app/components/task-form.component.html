@@ -124,6 +124,14 @@
                 </div>
             </div>
             <div class="row mb-1h">
+                <div class="col">
+                    <p class="mb-h"><strong>Current Status</strong></p>
+                    <textarea autoResize class="toggleable" rows="2"
+                        [formControl]="currentstatusForm.controls.current_status"
+                        (blur)="currentstatusForm.dirty ? currentstatusForm.save($event) : false"></textarea>
+                </div>
+            </div>
+            <div class="row mb-1h">
                 <div class="col-3">
                     <span class="checkbox">
                         <label>
