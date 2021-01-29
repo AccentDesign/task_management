@@ -12,6 +12,7 @@ class TaskSerializer(taggit_serializers.TaggitSerializer, serializers.ModelSeria
             'id',
             'title',
             'description',
+            'current_status',
             'created_at',
             'created_by',
             'job',

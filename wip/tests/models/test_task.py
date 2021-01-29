@@ -25,6 +25,10 @@ class TestModel(AppTestCase):
         field = Task._meta.get_field('description')
         self.assertModelField(field, models.TextField, null=True, blank=True)
 
+    def test_current_status(self):
+        field = Task._meta.get_field('current_status')
+        self.assertModelField(field, models.TextField, null=True, blank=True)
+
     def test_created_at(self):
         field = Task._meta.get_field('created_at')
         self.assertModelField(field, models.DateTimeField, blank=True)

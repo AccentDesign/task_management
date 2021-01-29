@@ -39,6 +39,7 @@ import { Observable } from 'rxjs';
 import { TaskAssigneeForm } from '../forms/task-assignee.form';
 import { TaskClosedForm } from '../forms/task-close.form';
 import { TaskDescriptionForm } from '../forms/task-description.form';
+import { TaskCurrentStatusForm } from '../forms/task-currentstatus.form';
 import { TaskNotChargeableForm } from '../forms/task-not-chargeable.form';
 import { TaskNoteForm } from '../forms/task-note.form';
 import { TaskTagForm } from '../forms/task-tag.form';
@@ -65,6 +66,7 @@ export class TaskFormComponent implements OnChanges {
     canDelete: boolean = false;
     closedForm: TaskClosedForm;
     descriptionForm: TaskDescriptionForm;
+    currentstatusForm: TaskCurrentStatusForm;
     dropzoneConfig: DropzoneConfigInterface = {
         url: '/api/task-files/',
         maxFilesize: 50,
@@ -98,6 +100,7 @@ export class TaskFormComponent implements OnChanges {
 
         this.closedForm = new TaskClosedForm(this.store, this.actionsSubject, { alwaysEditable: true });
         this.descriptionForm = new TaskDescriptionForm(this.store, this.actionsSubject);
+        this.currentstatusForm = new TaskCurrentStatusForm(this.store, this.actionsSubject);
         this.statusForm = new TaskStatusForm(this.store, this.actionsSubject);
         this.titleForm = new TaskTitleForm(this.store, this.actionsSubject);
         this.targetDateForm = new TaskTargetDateForm(this.store, this.actionsSubject);
@@ -120,6 +123,7 @@ export class TaskFormComponent implements OnChanges {
                 d => {
                     this.closedForm.load(d);
                     this.descriptionForm.load(d);
+                    this.currentstatusForm.load(d);
                     this.newNoteForm.load({task: d.id});
                     this.notChargeableForm.load(d);
                     this.statusForm.load(d);

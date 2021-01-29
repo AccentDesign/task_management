@@ -59,6 +59,7 @@
             <thead>
                 <tr>
                     <th>{% trans 'Task' %}</th>
+                    <th>{% trans 'Current Status' %}</th>
                     <th class="keep-min-width">{% trans 'Time Spent (in period)' %}</th>
                     <th class="keep-min-width">{% trans 'Time Spent (to date)' %}</th>
                     <th class="keep-min-width">{% trans 'Total Allocated Time' %}</th>
@@ -68,6 +69,7 @@
                 {% for task in billable_time_by_staff %}
                     <tr>
                         <td>{{ task }}</td>
+                        <td>{{ task.current_status|default:'-' }}</td>
                         <td class="text-right">{{ task.time_spent_in_period|duration_decimal|default:'-' }}</td>
                         <td class="text-right">{{ task.time_spent_to_date|duration_decimal|default:'-' }}</td>
                         <td class="text-right">{{ task.timing.allocated_hours|default:'-' }}</td>
@@ -85,6 +87,7 @@
             <thead>
                 <tr>
                     <th>{% trans 'Task' %}</th>
+                    <th>{% trans 'Current Status' %}</th>
                     <th class="keep-min-width">{% trans 'Time Spent (in period)' %}</th>
                     <th class="keep-min-width">{% trans 'Time Spent (to date)' %}</th>
                     <th class="keep-min-width">{% trans 'Total Allocated Time' %}</th>
@@ -94,6 +97,7 @@
                 {% for task in non_billable_time_by_staff %}
                     <tr>
                         <td>{{ task }}</td>
+                        <td>{{ task.current_status|default:'-' }}</td>
                         <td class="text-right">{{ task.time_spent_in_period|duration_decimal|default:'-' }}</td>
                         <td class="text-right">{{ task.time_spent_to_date|duration_decimal|default:'-' }}</td>
                         <td class="text-right">{{ task.timing.allocated_hours|default:'-' }}</td>
