@@ -13,33 +13,36 @@ class S3PrivateStorage(S3Boto3Storage):
     This will force the class to revert back to the default s3 way of generating the urls
     with the querystring auth.
 
-    acl='private' will mark the files as private when saving meaning
+    default_acl='private' will mark the files as private when saving meaning
     the they will return an AccessDenied without the querystring auth.
     """
 
-    def __init__(self, acl='private', bucket=None, **settings):
+    def __init__(self, **settings):
         settings.update({
-            'custom_domain': None
+            'custom_domain': None,
+            'default_acl': 'private',
         })
-        super().__init__(acl, bucket, **settings)
+        super().__init__(**settings)
 
 
 class S3PublicStorage(S3Boto3Storage):
     """ Just subclass or use original class """
 
-    def __init__(self, acl=None, bucket=None, **settings):
+    def __init__(self, **settings):
         settings.update({
-            'querystring_auth': False
+            'querystring_auth': False,
+            'default_acl': 'public-read',
         })
-        super().__init__(acl, bucket, **settings)
+        super().__init__(**settings)
 
 
 class S3StaticStorage(S3Boto3Storage):
     """ Stores files with the path prefix STATICFILES_LOCATION """
 
-    def __init__(self, acl=None, bucket=None, **settings):
+    def __init__(self, **settings):
         settings.update({
             'querystring_auth': False,
-            'location': base_settings.STATICFILES_LOCATION
+            'location': base_settings.STATICFILES_LOCATION,
+            'default_acl': 'public-read',
         })
-        super().__init__(acl, bucket, **settings)
+        super().__init__(**settings)
