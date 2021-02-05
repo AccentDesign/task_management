@@ -4,7 +4,7 @@ import {
     ElementRef,
     HostListener,
     Input
-    } from '@angular/core';
+} from '@angular/core';
 
 @Directive({
     selector: 'textarea[autoResize]'
@@ -21,7 +21,7 @@ export class AutoResizeDirective implements AfterViewInit {
     }
 
     ngAfterViewInit() {
-        this.adjust();
+      setTimeout(() => this.adjust());
     }
 
     adjust(): void {
