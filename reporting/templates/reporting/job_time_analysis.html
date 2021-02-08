@@ -69,7 +69,7 @@
                 {% for task in billable_time_by_staff %}
                     <tr>
                         <td>{{ task }}</td>
-                        <td>{{ task.current_status|default:'-' }}</td>
+                        <td>{{ task.status }}{% if task.current_status %}: {{ task.current_status }}{% endif %}</td>
                         <td class="text-right">{{ task.time_spent_in_period|duration_decimal|default:'-' }}</td>
                         <td class="text-right">{{ task.time_spent_to_date|duration_decimal|default:'-' }}</td>
                         <td class="text-right">{{ task.timing.allocated_hours|default:'-' }}</td>
@@ -97,7 +97,7 @@
                 {% for task in non_billable_time_by_staff %}
                     <tr>
                         <td>{{ task }}</td>
-                        <td>{{ task.current_status|default:'-' }}</td>
+                        <td>{{ task.status }}{% if task.current_status %}: {{ task.current_status }}{% endif %}</td>
                         <td class="text-right">{{ task.time_spent_in_period|duration_decimal|default:'-' }}</td>
                         <td class="text-right">{{ task.time_spent_to_date|duration_decimal|default:'-' }}</td>
                         <td class="text-right">{{ task.timing.allocated_hours|default:'-' }}</td>
