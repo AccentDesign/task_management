@@ -2,15 +2,16 @@ boto3
 channels
 channels_redis
 coreapi
-django<3
+django
 django-autocomplete-light
 django-filter
 django-reversion
 django-storages
 django-taggit
 django-taggit-serializer
-djangorestframework<3.11.0
+djangorestframework
 flatbuffers
+gunicorn
 markdown
 pillow
 psycopg2-binary
@@ -18,5 +19,6 @@ python-dateutil
 redis
 requests
 sentry-sdk
+uvicorn[standard]
 uwsgi
 cryptography==3.3.1
