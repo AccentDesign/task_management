@@ -21,4 +21,4 @@ requests
 sentry-sdk
 uvicorn[standard]
 uwsgi
-cryptography==3.3.1
+cryptography==3.3.2
