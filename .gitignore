@@ -3,6 +3,7 @@ node_modules
 .postgres*
 db.sqlite3
 **__pycache__**
+*.log
 *.pyc
 .coverage
 htmlcov

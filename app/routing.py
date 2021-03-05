@@ -9,7 +9,7 @@ from app.consumers import ModelBindingConsumer
 application = ProtocolTypeRouter({
     "websocket": AuthMiddlewareStack(
         URLRouter([
-            path("data/stream/", ModelBindingConsumer),
+            path("data/stream/", ModelBindingConsumer.as_asgi()),
         ]),
     ),
 })

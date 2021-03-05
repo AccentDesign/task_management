@@ -45,12 +45,6 @@ if settings.DEBUG:  # pragma: no cover
         path('__500/', TemplateView.as_view(template_name='500.html')),
     ]
 
-    import debug_toolbar
-
-    urlpatterns += [
-        path('__debug__/', include(debug_toolbar.urls)),
-    ]
-
 urlpatterns += [
     # catch all angular path and root app
     re_path(r'^(?P<path>.*)/$', Home.as_view()),
